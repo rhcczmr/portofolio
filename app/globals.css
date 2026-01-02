@@ -2,17 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==============================
+   CSS VARIABLES
+============================== */
 :root {
-  --bg-primary: #0A0E27;
-  --bg-secondary: #111827;
+  --bg-dark: #0A0E27;
+  --bg-dark-secondary: #0d1229;
   --bg-card: #1A1F3A;
-  --neon-cyan: #00D9FF;
-  --neon-purple: #A855F7;
-  --electric-blue: #3B82F6;
+  --primary: #22d3ee;
+  --primary-dark: #0891b2;
+  --secondary: #a855f7;
+  --secondary-dark: #7c3aed;
   --text-primary: #FFFFFF;
   --text-secondary: #94A3B8;
 }
 
+/* ==============================
+   BASE STYLES
+============================== */
 * {
   margin: 0;
   padding: 0;
@@ -25,51 +32,438 @@ html {
 
 body {
   overflow-x: hidden;
-  background: #0A0E27;
-  color: #FFFFFF;
+  background: var(--bg-dark);
+  color: var(--text-primary);
 }
 
-/* Scrollbar */
+/* ==============================
+   SCROLLBAR
+============================== */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #0A0E27;
+  background: var(--bg-dark);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00D9FF, #A855F7);
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
   border-radius: 10px;
 }
 
-/* Glow */
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
-}
-.glow-purple {
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-dark), var(--secondary-dark));
 }
 
+/* ==============================
+   UTILITY CLASSES
+============================== */
+.bg-dark {
+  background-color: var(--bg-dark);
+}
+
+.bg-dark-secondary {
+  background-color: var(--bg-dark-secondary);
+}
+
+.bg-dark-card {
+  background-color: var(--bg-card);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+/* Gradient Text */
 .gradient-text {
-  background: linear-gradient(90deg, #00D9FF, #A855F7);
+  background: linear-gradient(90deg, var(--primary), #06b6d4, var(--secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Grid Background */
 .grid-background {
   background-image:
-    linear-gradient(rgba(0,217,255,.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,217,255,.1) 1px, transparent 1px);
+    linear-gradient(rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.08) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
-@keyframes gradient-shift {
-  0% { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
+/* Animated Gradient Background */
+.animated-gradient {
+  background: linear-gradient(
+    45deg,
+    var(--bg-dark),
+    #0f172a,
+    var(--bg-dark),
+    #1e1b4b
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 20s ease infinite;
 }
 
-.animated-gradient {
-  background: linear-gradient(45deg,#0A0E27,#1A1F3A,#0A0E27);
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
+/* ==============================
+   GLOW EFFECTS
+============================== */
+.shadow-glow-cyan {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3),
+              0 0 40px rgba(34, 211, 238, 0.1);
+}
+
+.shadow-glow-cyan-lg {
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.4),
+              0 0 60px rgba(34, 211, 238, 0.2),
+              0 0 90px rgba(34, 211, 238, 0.1);
+}
+
+.shadow-glow-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3),
+              0 0 40px rgba(168, 85, 247, 0.1);
+}
+
+.shadow-glow-purple-lg {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.4),
+              0 0 60px rgba(168, 85, 247, 0.2),
+              0 0 90px rgba(168, 85, 247, 0.1);
+}
+
+/* ==============================
+   ANIMATIONS - KEYFRAMES
+============================== */
+
+/* Gradient Shift */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Float Animations */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+}
+
+@keyframes float-slow-reverse {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 30px) scale(1.05);
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(15px, -15px);
+  }
+}
+
+/* Pulse Glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.6),
+                0 0 60px rgba(34, 211, 238, 0.3);
+  }
+}
+
+/* Blink (for cursor) */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Spin Slow */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bounce Subtle */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Scale Pulse */
+@keyframes scale-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ==============================
+   ANIMATION CLASSES
+============================== */
+.animate-float-slow {
+  animation: float-slow 20s ease-in-out infinite;
+}
+
+.animate-float-slow-reverse {
+  animation: float-slow-reverse 25s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 15s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 3s ease-in-out infinite;
+}
+
+/* ==============================
+   GRADIENT BORDERS
+============================== */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* ==============================
+   GLASSMORPHISM
+============================== */
+.glass {
+  background: rgba(26, 31, 58, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+}
+
+.glass-dark {
+  background: rgba(10, 14, 39, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+}
+
+/* ==============================
+   HOVER EFFECTS
+============================== */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+}
+
+.hover-glow-cyan:hover {
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+}
+
+.hover-glow-purple:hover {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+}
+
+/* ==============================
+   RESPONSIVE UTILITIES
+============================== */
+@media (max-width: 640px) {
+  .shadow-glow-cyan {
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+  }
+  
+  .shadow-glow-purple {
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+  }
+  
+  /* Reduce animation intensity on mobile for performance */
+  .animate-float-slow,
+  .animate-float-slow-reverse,
+  .animate-float-medium {
+    animation-duration: 30s;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ==============================
+   SELECTION
+============================== */
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: white;
+}
+
+/* ==============================
+   FOCUS STYLES
+============================== */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ==============================
+   CUSTOM COMPONENTS
+============================== */
+
+/* Card Hover Effect */
+.card-interactive {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-interactive:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+@media (max-width: 768px) {
+  .card-interactive:active {
+    transform: scale(0.98);
+  }
+  
+  .card-interactive:hover {
+    transform: none;
+  }
+}
+
+/* Button Primary */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #06b6d4);
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Button Secondary */
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
+  border: 2px solid rgba(34, 211, 238, 0.5);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(34, 211, 238, 0.1);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* ==============================
+   TAILWIND CUSTOM ADDITIONS
+============================== */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+  }
+  
+  .border-gradient {
+    border-image: linear-gradient(135deg, var(--primary), var(--secondary)) 1;
+  }
 }
